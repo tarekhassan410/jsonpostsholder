@@ -17,12 +17,6 @@ export default function Post() {
     useContext(PostsContext);
 
   useEffect(() => {
-    console.log(id);
-    if (id < 1) {
-      setPost({ title: "Error", body: "Error during loading data" });
-      setLoading(false);
-      return;
-    }
     getPostById(id).then((response) => {
       setPost(response);
       setLoading(false);
@@ -150,32 +144,42 @@ export default function Post() {
           </div>
         )
       )}
-      <div className="flex flex-row justify-between mt-2">
-        <Link
-          to={"/post/" + (parseInt(id) - 1)}
-          onClick={() => {
-            setLoading(true);
-            setPostDeleted(false);
-          }}
-        >
-          <button className="px-3 py-2 bg-white rounded-lg mb-4 shadow-lg">
-            {" "}
-            <i className="fas fa-backward mr-1"></i>
-            Previous post{" "}
-          </button>
-        </Link>
-        <Link
-          to={"/post/" + (parseInt(id) + 1)}
-          onClick={() => {
-            setLoading(true);
-            setPostDeleted(false);
-          }}
-        >
-          <button className="px-3 py-2 bg-white rounded-lg mb-4 shadow-lg">
-            {" "}
-            Next post <i className="fas fa-forward mr-1"></i>
-          </button>
-        </Link>
+      <div
+        className={
+          id == 1
+            ? "flex flex-row justify-end mt-2"
+            : "flex flex-row justify-between mt-2"
+        }
+      >
+        {id != 1 && (
+          <Link
+            to={"/post/" + (parseInt(id) - 1)}
+            onClick={() => {
+              setLoading(true);
+              setPostDeleted(false);
+            }}
+          >
+            <button className="px-3 py-2 bg-white rounded-lg mb-4 shadow-lg">
+              {" "}
+              <i className="fas fa-backward mr-1"></i>
+              Previous post{" "}
+            </button>
+          </Link>
+        )}
+        {id != 100 && (
+          <Link
+            to={"/post/" + (parseInt(id) + 1)}
+            onClick={() => {
+              setLoading(true);
+              setPostDeleted(false);
+            }}
+          >
+            <button className="px-3 py-2 bg-white rounded-lg mb-4 shadow-lg">
+              {" "}
+              Next post <i className="fas fa-forward mr-1"></i>
+            </button>
+          </Link>
+        )}
       </div>
     </div>
   );
