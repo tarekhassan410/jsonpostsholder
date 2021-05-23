@@ -14,8 +14,8 @@ export default function App() {
       <div
         className={
           direction == "ltr"
-            ? "bg-gray-100 min-h-screen main-container ltr"
-            : "bg-gray-100 min-h-screen main-container rtl"
+            ? "bg-gray-200 min-h-screen main-container ltr"
+            : "bg-gray-200 min-h-screen main-container rtl"
         }
       >
         <nav className="h-16 	shadow-lg">

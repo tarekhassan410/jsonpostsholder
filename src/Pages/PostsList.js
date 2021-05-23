@@ -20,8 +20,8 @@ export default function PostsList() {
       let filteredPosts = [...allPosts];
       filteredPosts = filteredPosts.filter(
         (post) =>
-          post.title.includes(searchKeyword) ||
-          post.body.includes(searchKeyword)
+          post.title.includes(searchKeyword.toLowerCase()) ||
+          post.body.includes(searchKeyword.toLowerCase())
       );
       setLoading(false);
       setPosts(filteredPosts);

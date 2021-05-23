@@ -17,12 +17,17 @@ export default function Post() {
     useContext(PostsContext);
 
   useEffect(() => {
+    console.log(id);
+    if (id < 1) {
+      setPost({ title: "Error", body: "Error during loading data" });
+      setLoading(false);
+      return;
+    }
     getPostById(id).then((response) => {
-      console.log("post: ", response);
       setPost(response);
       setLoading(false);
     });
-  }, []);
+  }, [id]);
 
   function updatePost() {
     if (newPostTitle.length == 0 || newPostDesc == 0) {
@@ -47,11 +52,12 @@ export default function Post() {
         setDeleteError(true);
       });
   }
+
   return (
     <div className="pt-10">
       {" "}
       <Link to="/">
-        <button className="px-3 py-2 bg-white rounded-lg mb-8 shadow-lg">
+        <button className="px-3 py-2 bg-white rounded-lg mb-4 shadow-lg">
           <i className="fas fa-arrow-left mr-1" />
           Back{" "}
         </button>
@@ -118,7 +124,8 @@ export default function Post() {
           </div>
         </div>
       ) : (
-        !postDeleted && (
+        !postDeleted &&
+        !loading && (
           <div className="bg-white shadow-lg rounded-lg p-4">
             {" "}
             <div className="text-indigo-900 text-2xl font-semibold">
@@ -143,6 +150,33 @@ export default function Post() {
           </div>
         )
       )}
+      <div className="flex flex-row justify-between mt-2">
+        <Link
+          to={"/post/" + (parseInt(id) - 1)}
+          onClick={() => {
+            setLoading(true);
+            setPostDeleted(false);
+          }}
+        >
+          <button className="px-3 py-2 bg-white rounded-lg mb-4 shadow-lg">
+            {" "}
+            <i className="fas fa-backward mr-1"></i>
+            Previous post{" "}
+          </button>
+        </Link>
+        <Link
+          to={"/post/" + (parseInt(id) + 1)}
+          onClick={() => {
+            setLoading(true);
+            setPostDeleted(false);
+          }}
+        >
+          <button className="px-3 py-2 bg-white rounded-lg mb-4 shadow-lg">
+            {" "}
+            Next post <i className="fas fa-forward mr-1"></i>
+          </button>
+        </Link>
+      </div>
     </div>
   );
 }
