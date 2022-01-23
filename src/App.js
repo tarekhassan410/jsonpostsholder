@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PostsList from "./Pages/PostsList";
 import Post from "./Pages/Post";
 import { Route, BrowserRouter as Router, Link, Switch } from "react-router-dom";
@@ -18,7 +18,7 @@ export default function App() {
             : "bg-gray-200 min-h-screen main-container rtl"
         }
       >
-        <nav className="h-16 	shadow-lg">
+        <nav className="bg-green-700 text-white h-16 shadow-lg">
           <ul className="container mx-auto px-4 flex flex-row items-center h-full">
             <li className="mx-2">
               {" "}
